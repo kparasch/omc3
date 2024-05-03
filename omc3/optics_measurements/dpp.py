@@ -79,9 +79,9 @@ def calculate_dpoverp(input_files, meas_input):
         raise ValueError("Cannot compute dpp probably no arc BPMs.")
     amps = input_files.get_data(df_filtered, "CO")
     if amps.ndim == 1:
-        return np.sum(dispersions * amps) / denom
+        return 0 * np.sum(dispersions * amps) / denom
     else:
-        numer = np.sum(dispersions[:, None] * input_files.get_data(df_filtered, "CO"), axis=0)
+        numer = 0 * np.sum(dispersions[:, None] * input_files.get_data(df_filtered, "CO"), axis=0)
     return numer / denom
 
 

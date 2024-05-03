@@ -90,17 +90,18 @@ def calculate(measure_input, input_files, tunes, phases, invariants, header):
                 LOGGER.warning(f"RDT calculation failed for {jklm2str(*rdt)}: {str(e)}")
                 continue
             write(df, add_freq_to_header(header, plane, rdt), meas_input, plane, rdt)
-    for plane in PLANES:
-        bpm_names = input_files.bpms(dpp_value=0)
-        for_rdts = _best_90_degree_phases(meas_input, bpm_names, phases, tunes, plane)
-        LOGGER.info(f"Average phase advance between BPM pairs: {for_rdts.loc[:, 'MEAS'].mean()}")
-        for rdt in double_plane_rdts[plane]:
-            try:
-                df = _process_rdt(meas_input, input_files, for_rdts, invariants, plane, rdt)
-            except ValueError as e:
-                LOGGER.warning(f"RDT calculation failed for {jklm2str(*rdt)}: {str(e)}")
-                continue
-            write(df, add_freq_to_header(header, plane, rdt), meas_input, plane, rdt)
+    # for plane in PLANES:
+    #     bpm_names = input_files.bpms(dpp_value=0)
+    #     print(plane, phases)
+    #     for_rdts = _best_90_degree_phases(meas_input, bpm_names, phases, tunes, plane)
+    #     LOGGER.info(f"Average phase advance between BPM pairs: {for_rdts.loc[:, 'MEAS'].mean()}")
+    #     for rdt in double_plane_rdts[plane]:
+    #         try:
+    #             df = _process_rdt(meas_input, input_files, for_rdts, invariants, plane, rdt)
+    #         except ValueError as e:
+    #             LOGGER.warning(f"RDT calculation failed for {jklm2str(*rdt)}: {str(e)}")
+    #             continue
+    #         write(df, add_freq_to_header(header, plane, rdt), meas_input, plane, rdt)
 
 
 def write(df, header, meas_input, plane, rdt):

@@ -40,6 +40,8 @@ class InputFiles(dict):
         if len(self['X']) + len(self['Y']) == 0:
             raise IOError("No valid input files")
         dpp_values = dpp.calculate_dpoverp(self, optics_opt)
+        print(dpp_values)
+        # dpp_values = [0.]
         LOGGER.info(f"DPPS: {dpp_values}")
         amp_dpp_values = dpp.calculate_amp_dpoverp(self, optics_opt)
         LOGGER.info(f"DPP_AMPS: {amp_dpp_values}")
